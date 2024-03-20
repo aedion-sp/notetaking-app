@@ -2,20 +2,17 @@ version: '3.9'
 
 services:
   backend:
-    container_name: backend
+    container_name: nt_backend
     image: backend
     build:
       context: ./backend
       dockerfile: backend.dockerfile
-    restart: always
     ports:
-      - 4000:4000
-    volumes:
-      - ./backend:/app
+      - 5000:5000
     depends_on:
       - db
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@database:5432/postgres
+      - DATABASE_URL=postgresql://postgres:postgres@database:5432/postgres?schema=public
   db:
     container_name: database
     image: postgres:12
